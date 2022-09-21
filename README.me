@@ -1,0 +1,40 @@
+logica de retirar dinero del cajero
+
+1. debo definir cuantos bielletes de cada denominacion hay 
+ # de 100 mil
+ # de 50 mil
+ # de 20 mil
+ # de 10 mil
+
+2. pedir el numero de telefono y el numero de confirmacion y validar en el listado de usuarios
+    que exista ese usuarios
+
+3. pedir el valor a retirar
+
+4. normalizar el valor a retirar ("con el fin de que solo se puedan retirar valores multiplos de 10000")
+
+## a partir de ahora voy a hacer un ejemplo con un valor de 250.000
+## a AUX le asigno el valor a retirar
+
+5. paso uno saber cuantos billetes de 100 mil debo entregar, para ello divido el valor a retirar entre 100 mil
+
+NC = parseint((AUX / 100000))
+NC = 2
+
+6. tomo la parte entera de NC y verifico que pueda entregar ese numero de billetes de 100 mil
+
+si(NUM_BILLETES_CIEN == 0)
+    VEC = 0;
+sino si(NUM_BILLETES_CIEN < NC)
+    VEC = NC - NUM_BILLETES_CIEN;
+sino 
+    VEC = NC;
+fin si
+
+NC = NC - VEC;
+
+VALC = VEC * 100000;
+
+AUX = AUX - VALC;
+
+7. aplico la misma logica para los billetes de 50, 20 y 10

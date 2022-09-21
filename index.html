@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajero Davivienda</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/logo.png" type="image/png">
+</head>
+<body>
+
+    <div id="vista-principal" class="contenedor">
+        <nav>
+            <!-- <img src="img/logotexto.png" class="logo" alt="" srcset=""> -->
+            <h1>Davivienda</h1>
+        </nav>
+        <div class="">
+            
+        </div>
+        <div class="botones">
+            <button onclick="pedir_numero()" class="boton">⬅️ Retiros Nequi</button>
+            <button onclick="pedir_numero()" class="boton">Retiros Daviplata ➡️</button>
+        </div>
+    </div>
+
+    <div id="vista-telefono" class="contenedor centrar d-none ">
+        <h2>telefono</h2>
+        <input id="txt-telefono" type="number">
+        <div class="botones">
+            <button onclick="cancelar()" class="boton">⬅️ Cancelar</button>
+            <button onclick="validar_telefono()" class="boton">Continuar ➡️</button>
+        </div>
+    </div>
+    
+    <div id="vista-codigo" class="contenedor centrar d-none">
+        <h2>codigo</h2>
+        <input id="txt-codigo" type="number">
+        <div class="botones">
+            <button onclick="cancelar()" class="boton">⬅️ Cancelar</button>
+            <button onclick="validar_codigo()" class="boton">Continuar ➡️</button>
+        </div>
+    </div>
+    
+    <div id="vista-cantidad" class="contenedor centrar d-none">
+        <h2>cantidad</h2>
+        <input id="txt-cantidad" type="number">
+        <div class="botones">
+            <button onclick="cancelar()" class="boton">⬅️ Cancelar</button>
+            <button onclick="validar_cantidad()" class="boton">Continuar ➡️</button>
+        </div>
+    </div>
+    
+    <div id="vista-error" class="contenedor centrar d-none">
+        <div class="botones">
+            <button onclick="cancelar()" class="boton">⬅️ finalizar</button>
+        </div>
+    </div>
+    <div id="vista-dinero" class="contenedor centrar d-none">
+        <div class="botones">
+            <button onclick="cancelar()" class="boton">⬅️ Finalizar</button>
+        </div>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyBEOQI7N7F6n6H9RxlVlA251pYtp5s-x1w",
+          authDomain: "juego-164fe.firebaseapp.com",
+          projectId: "juego-164fe",
+          storageBucket: "juego-164fe.appspot.com",
+          messagingSenderId: "203426321775",
+          appId: "1:203426321775:web:bb12680f12373e6168c49a",
+          measurementId: "G-3PKXZZHDGZ"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
+    <script src="js/usuario.js"></script>
+    <script src="js/dinero.js"></script>
+    <script src="js/vista.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

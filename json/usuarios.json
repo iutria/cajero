@@ -1,0 +1,18 @@
+{
+    "1":{
+        "documento":"123456",
+        "telefono":"3052852880",
+        "nombre":"ivan",
+        "apellido":"utria",
+        "saldo": 300000,
+        "codigo": "869539"
+    },
+    "2":{
+        "documento":"9876054321",
+        "telefono":"3045510432",
+        "nombre":"cristina",
+        "apellido":"alvarez",
+        "saldo": 7200000,
+        "codigo": "869539"
+    }
+}
