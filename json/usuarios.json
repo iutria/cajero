@@ -14,5 +14,13 @@
         "apellido":"alvarez",
         "saldo": 7200000,
         "codigo": "869539"
+    },
+    "3":{
+        "documento":"9876054321",
+        "telefono":"1234",
+        "nombre":"cristina",
+        "apellido":"alvarez",
+        "saldo": 7200000,
+        "codigo": "1234"
     }
 }
