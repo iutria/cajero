@@ -7,6 +7,12 @@ class Dinero{
 
 let limite_villetes_cien = 5;
 
+// let dinero = [
+//     new Dinero("100000",0),
+//     new Dinero("50000",0),
+//     new Dinero("20000",0),
+//     new Dinero("10000",0),
+// ];
 let dinero = [
     new Dinero("100000",17),
     new Dinero("50000",28),

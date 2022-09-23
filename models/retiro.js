@@ -18,10 +18,14 @@ class Retiro{
         this.veinte = map['veinte'];
         this.diez = map['diez'];
     }
+    get esValido(){
+        return this.valor == ((this.cien*100000)+(this.cincuenta*50000)+(this.veinte*20000)+(this.diez*10000));
+    }
 }
 
 
 function retirar(valor){
+    console.log('antes',dinero,valor);
     if(tipo_retiro==0 && valor>2700000){
         mostrar_alerta('Error...',`valor invalido, no puede retirar mas de $2'700.000`);
         return;
@@ -37,23 +41,23 @@ function retirar(valor){
     const vuelto = str.substring(str.length - 4,str.length);
     const nivelado = valor - parseInt(vuelto);
 
-    let entregar = [];
+    let entregar = [0,0,0,0];
 
     let aux = nivelado;
     let NV = 0
 
     for (let i = 0; i < 4; i++) {
         NV = parseInt(aux/dinero[i].valor);
-
+        console.log('nv',NV);
         if(dinero[i].cantidad == 0){
             entregar[i] = 0;
-        }else if(dinero[i].cantidad < NV){
-            entregar[i] = NV - dinero[i].cantidad;
+        }else if(NV > dinero[i].cantidad){
+            entregar[i] = dinero[i].cantidad;
         }else{
             entregar[i] = NV;
         }
 
-        if(dinero[i].valor == 100000){
+        if(dinero[i].valor == '100000'){
             if(entregar[i] > limite_villetes_cien){
                 entregar[i] = limite_villetes_cien;
             }
@@ -74,16 +78,31 @@ function retirar(valor){
         entregar[3],
     );
 
+    if(!retiro.esValido){
+        dinero[0].cantidad = dinero[0].cantidad + retiro.cien;
+        dinero[1].cantidad = dinero[1].cantidad + retiro.cincuenta;
+        dinero[2].cantidad = dinero[2].cantidad + retiro.veinte;
+        dinero[3].cantidad = dinero[3].cantidad + retiro.diez;
+
+        retiro.cien = 0;
+        retiro.cincuenta = 0;
+        retiro.veinte = 0;
+        retiro.diez = 0;
+
+        retiro.valor = 0
+    }
+
     agregar_retiro(retiro);
     
     quitar_poner_vista(vista_cantidad,vista_dinero);
 
 
-    document.getElementById('cantidad-100').innerHTML = entregar[0];
-    document.getElementById('cantidad-50').innerHTML = entregar[1];
-    document.getElementById('cantidad-20').innerHTML = entregar[2];
-    document.getElementById('cantidad-10').innerHTML = entregar[3];
+    document.getElementById('cantidad-100').innerHTML = retiro.cien;
+    document.getElementById('cantidad-50').innerHTML = retiro.cincuenta;
+    document.getElementById('cantidad-20').innerHTML = retiro.veinte;
+    document.getElementById('cantidad-10').innerHTML = retiro.diez;
 
 
     console.log(retiro);
+    console.log('esto hay',dinero);
 }

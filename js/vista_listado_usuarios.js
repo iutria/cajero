@@ -36,6 +36,8 @@ function ver_usuarios(){
         diez += retirados[3];
         lista += `
             <tr>
+                <td scope="row">${`<img src="${usu.tipo_cuenta==0?'https://play-lh.googleusercontent.com/J2CfzgROe1_weYm7yNIffrAGsGeahADM6r2qMN3C9pNw-i0TJR71LGbVX9y2N7t6dw':
+                'https://www.daviplata.sv/wp-content/uploads/2021/02/logo-nuevo-02.png'}" style='width:50px;height: 50px;' alt="">`}</td>
                 <td scope="row">${usu.documento}</td>
                 <td>${usu.nombre_completo}</td>
                 <td>${usu.telefono}</td>
@@ -53,7 +55,7 @@ function ver_usuarios(){
                 </td>
             </tr>
             <tr class="collapse" id="${usu.id}">
-                <td colspan="6" class="table-secondary">
+                <td colspan="7" class="table-secondary">
                     ${obtener_lista_retiros(usu.retiros)}
                     
                 </td>
@@ -65,6 +67,11 @@ function ver_usuarios(){
     document.getElementById('ret-50').innerHTML = cincuenta;
     document.getElementById('ret-20').innerHTML = veinte;
     document.getElementById('ret-10').innerHTML = diez;
+
+    document.getElementById('act-100').innerHTML = dinero[0].cantidad;
+    document.getElementById('act-50').innerHTML = dinero[1].cantidad;
+    document.getElementById('act-20').innerHTML = dinero[2].cantidad;
+    document.getElementById('act-10').innerHTML = dinero[3].cantidad;
 }
 
 function obtener_lista_retiros(retiros){

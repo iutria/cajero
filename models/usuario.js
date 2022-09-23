@@ -35,7 +35,7 @@ let usuarios = [
     new Usuario('263927192','3052852880','ivan','utria',270000,'42321',0,[
         new Retiro(500000, '2022/07/03', 4, 1, 2, 1)
     ],1),
-    new Usuario('145','1','jesus','molina',850000,'1',0,[],1)
+    new Usuario('145','1','jesus','molina',3000000,'1',0,[],0)
 ];
 
 function agregar_retiro(retiro){
