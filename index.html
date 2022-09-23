@@ -11,82 +11,139 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body>
-
+    <!-- titulo y boton de listado de usuarios -->
     <nav>
+        <button class="boton-listado" onclick="ver_usuarios()"><i class="bi bi-person"></i></button>
         <h1>Simulador Retiros Cajero</h1>
     </nav>
+
+    <!-- vista donde se selecciona el tipo de retiro -->
     <div id="vista-principal" class="contenedor centrar">
-        <button onclick="pedir_numero()" class="boton">
+        <button onclick="seleccionar_tipo_retiro(0)" class="boton" data-bs-toggle="tooltip" data-bs-placement="top" title="Retiro Nequi">
             <img src="svg/nequi.svg" alt="">
         </button>
-        <button onclick="pedir_numero()" class="boton">
+        <button onclick="seleccionar_tipo_retiro(1)" class="boton" data-bs-toggle="tooltip" data-bs-placement="top" title="Retiro Daviplata">
             <img src="svg/daviplata.svg" alt="">
         </button>
     </div>
+    
 
+    <!-- vista de listado de usuarios -->
+    <div id="vista-usuarios" class="contenedor-2 d-none column padding-20">
+        <div class="botones centrar" style="width: 100%">
+            <button onclick="cancelar()" class="boton" style="width: 150px">
+                <span><i class="bi bi-box-arrow-left"></i> salir</span>
+            </button>
+        </div>
+        <br>
+        <br>
+
+        <div>
+            <div class="botones centrar" style="gap: 20px;">
+                <div class="boton centrar" style="color: #031926;" id="ret-100" data-bs-toggle="tooltip" data-bs-placement="top" title="$100.000"></div>
+                <div class="boton centrar" style="color: #031926;" id="ret-50" data-bs-toggle="tooltip" data-bs-placement="top" title="$50.000"></div>
+                <div class="boton centrar" style="color: #031926;" id="ret-20" data-bs-toggle="tooltip" data-bs-placement="top" title="$20.000"></div>
+                <div class="boton centrar" style="color: #031926;" id="ret-10" data-bs-toggle="tooltip" data-bs-placement="top" title="$10.000"></div>
+            </div>
+        </div>
+        <br>
+            
+        <table class="table table-light">
+            <thead>
+                <tr>
+                <th scope="col">Documento</th>
+                <th scope="col">Nombre Apellido</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Saldo</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Retiros</th>
+                </tr>
+            </thead>
+            <tbody id="listado-usuarios">
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- vista donde se ingresa el numero de telefono -->
     <div id="vista-telefono" class="contenedor centrar d-none column">
-        <h2>Ingrese su número de Teléfono</h2>
+        <h2 id="titulo-telefono"></h2>
         <br>
         <div class="input-group mb-3 padding">
             <span class="input-group-text" id="basic-addon1"><i class="bi bi-telephone"></i></span>
-            <input id="txt-telefono" type="number" class="form-control" placeholder="Número de telefono" aria-label="telefono" aria-describedby="basic-addon1">
+            <input id="txt-telefono" onkeypress="validar_telefono(event)" type="number" class="form-control" placeholder="Número de telefono" aria-label="telefono" aria-describedby="basic-addon1">
         </div>
         <br>
         <div class="botones">
             <button onclick="cancelar()" class="boton">
                 <i class="bi bi-box-arrow-left"></i>
             </button>
-            <button onclick="validar_telefono()" class="boton">
+            <button onclick="validar_telefono(null)" class="boton">
                 <i class="bi bi-arrow-right"></i>
             </button>
         </div>
     </div>
-    
-    <div id="vista-codigo" class="contenedor centrar d-none column">
 
+
+    <!-- vista donde se ongresa el codigo de confirmacion -->
+    <div id="vista-codigo" class="contenedor centrar d-none column">
         <h2>Ingrese el código de confirmación</h2>
         <br>
         <div class="input-group mb-3 padding">
             <span class="input-group-text" id="basic-addon1"><i class="bi bi-qr-code"></i></span>
-            <input id="txt-codigo" type="number" class="form-control" placeholder="Número de confirmacion" aria-label="confirmacion" aria-describedby="basic-addon1">
+            <input id="txt-codigo" onkeypress="validar_codigo(event)" type="number" class="form-control" placeholder="Número de confirmacion" aria-label="confirmacion" aria-describedby="basic-addon1">
         </div>
         <br>
         <div class="botones">
             <button onclick="cancelar()" class="boton">
                 <i class="bi bi-box-arrow-left"></i>
             </button>
-            <button onclick="validar_codigo()" class="boton">
+            <button onclick="validar_codigo(null)" class="boton">
                 <i class="bi bi-arrow-right"></i>
             </button>
         </div>
     </div>
-    
+
+
+    <!-- vista donde se ingresa la cantidad a retirar -->
     <div id="vista-cantidad" class="contenedor centrar d-none column">
         <h2>¿Cuanto desea retirar?</h2>
         <br>
         <div class="input-group mb-3 padding">
             <span class="input-group-text" id="basic-addon1"><i class="bi bi-currency-dollar"></i></span>
-            <input id="txt-cantidad" type="number" class="form-control" placeholder="Número de confirmacion" aria-label="confirmacion" aria-describedby="basic-addon1">
+            <input id="txt-cantidad" onkeypress="validar_retiro(event)" type="number" class="form-control" placeholder="ingrese la cantidad a retirar" aria-label="confirmacion" aria-describedby="basic-addon1">
         </div>
         <br>
         <div class="botones">
             <button onclick="cancelar()" class="boton">
                 <i class="bi bi-box-arrow-left"></i>
             </button>
-            <button onclick="validar_cantidad()" class="boton">
+            <button onclick="validar_retiro(null)" class="boton">
                 <i class="bi bi-arrow-right"></i>
             </button>
         </div>
     </div>
     
-    <div id="vista-error" class="contenedor centrar d-none">
-        <div class="botones">
-            <button onclick="cancelar()" class="boton">⬅️ finalizar</button>
-        </div>
-    </div>
+    <!-- vista donde se muestra la cantidad de dinero -->
     <div id="vista-dinero" class="contenedor centrar d-none">
-        <div class="botones">
-            <button onclick="cancelar()" class="boton">⬅️ Finalizar</button>
+        <div class="contenedor-billete" id="">
+            <img class="billete" src="img/100.jpg" alt="">
+            <span id="cantidad-100">0</span>
+        </div>
+        <div class="contenedor-billete" id="">
+            <img class="billete" src="img/50.png" alt="">
+            <span id="cantidad-50">0</span>
+        </div>
+        <div class="contenedor-billete" id="">
+            <img class="billete" src="img/20.png" alt="">
+            <span id="cantidad-20">0</span>
+        </div>
+        <div class="contenedor-billete" id="">
+            <img class="billete" src="img/10.png" alt="">
+            <span id="cantidad-10">0</span>
+        </div>
+        <div class="botones" style="position: absolute; bottom: 50px; left: calc(50% - 25px);">
+            <button onclick="cancelar()" class="boton">Ok</button>
         </div>
     </div>
 
@@ -97,30 +154,38 @@
 
       
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+  <div class="modal fade" id="alerta" tabindex="-1" aria-labelledby="alertaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="alerta-titulo"> </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          ...
+        <div class="modal-body" id="alerta-mensaje">
+          
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
         </div>
       </div>
     </div>
   </div>
     
-    <script src="js/usuario.js"></script>
-    <script src="js/dinero.js"></script>
-    <script src="js/vista.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    
+    <script src="models/retiro.js"></script>
+    <script src="models/usuario.js"></script>
+    <script src="models/dinero.js"></script>
+    
+    <script src="js/vista.js"></script>
+    <script src="js/nombres.js"></script>
+    <script src="js/apellidos.js"></script>
     <script src="js/main.js"></script>
+    
+    <script src="js/vista_listado_usuarios.js"></script>
+    <script src="js/validar_telefono.js"></script>
+    <script src="js/validar_codigo.js"></script>
+    <script src="js/validar_retiro.js"></script>
 </body>
 </html>
