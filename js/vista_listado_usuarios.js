@@ -1,9 +1,5 @@
 let vista_usu = document.getElementById(vista_usuarios);
 
-// vista_usu.innerHTML = `
-    
-//     `;
-
 function ver_usuarios(){
     quitar_poner_vista(
         [
@@ -44,7 +40,7 @@ function ver_usuarios(){
                 <td>$${usu.saldo}</td>
                 <td>${usu.codigo}</td>
                 <td>
-                    <a class="btn btn-primary" 
+                    <a class="btn btn-${usu.retiros.length==0?'secondary':'success'}" 
                     data-bs-toggle="collapse" 
                     href="#${usu.id}" 
                     role="button" 
